@@ -26,6 +26,7 @@
 BOOL Facebookbool = YES;
 bool Twitterbool = NO;
 bool Instabool = NO;
+bool isPhoto = NO;
 
 
 - (IBAction)Facebook:(id)sender {
@@ -51,6 +52,27 @@ bool Instabool = NO;
     self.ImageShift.image = [UIImage imageNamed:@"Instagram logo.png"];
 }
 
+- (IBAction)PhotoButton:(id)sender {
+    isPhoto = YES;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+- (void)imagePickerController: (UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.ImageShift.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 - (IBAction)Postbutton:(id)sender {
     SLComposer = [[SLComposeViewController alloc] init];
     if (Facebookbool) {
@@ -63,4 +85,5 @@ bool Instabool = NO;
     [SLComposer setInitialText:[NSString stringWithFormat:@"%@",self.TextToSend.text]];
     [self presentViewController:SLComposer animated:YES completion:NULL];
 }
+
 @end

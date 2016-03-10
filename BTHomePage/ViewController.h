@@ -14,15 +14,18 @@
     SLComposeViewController *SLComposer;
 }
 
+
 - (IBAction)Facebook:(id)sender;
 - (IBAction)Twitter:(id)sender;
 
 - (IBAction)Instagram:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIImageView *ImageShift;
+@property (strong, nonatomic) IBOutlet UIImageView *ImageShift;
 
 - (IBAction)Postbutton:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *TextToSend;
+- (IBAction)PhotoButton:(id)sender;
 
 @end
-
+@interface APPViewController: UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@end
